@@ -1,0 +1,12 @@
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.vercel/
+**/.vercel/
+.env
+.env.*
+.DS_Store
+*.mp4
+*.mov
+!Emiratisation 2026/public/**/*.mp4

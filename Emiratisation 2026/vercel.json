@@ -1,0 +1,19 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/emiratisation-webinar",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/emiratisation-webinar",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/emiratisation-webinar/",
+      "destination": "/index.html"
+    }
+  ]
+}

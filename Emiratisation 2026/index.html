@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emiratisation 2026 UAE Employer Briefing | TASC</title>
+    <meta
+      name="description"
+      content="Understand the 2026 Emiratisation rules, NAFIS deadlines, salary floor, penalties, and compliant hiring options. Book a free TASC workforce advisory call."
+    />
+    <meta property="og:title" content="Emiratisation 2026 UAE Employer Briefing | TASC" />
+    <meta
+      property="og:description"
+      content="Watch TASC's Emiratisation briefing and learn what UAE employers need to do before the 2026 deadlines."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="ChatGPT Image Jun 8, 2026, 03_40_18 PM.png" />
+    <link rel="stylesheet" href="src/styles/index.css" />
+    <link rel="stylesheet" href="src/styles/emiratisation-2026.css" />
+
+    <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/embed/v2.js"></script>
+    <script>
+      var isVideoUnlocked = false;
+      var shouldPlayAfterSubmit = false;
+
+      function scrollToForm() {
+        document.getElementById("advisory-call")?.scrollIntoView({ behavior: "smooth" });
+      }
+
+      function getGatedVideo() {
+        return document.querySelector("[data-gated-video]");
+      }
+
+      function openVideoGate() {
+        var video = getGatedVideo();
+
+        if (isVideoUnlocked) {
+          video?.play();
+          return;
+        }
+
+        shouldPlayAfterSubmit = true;
+        video?.pause();
+        document.body.classList.add("em-modal-open");
+        document.querySelector("[data-video-gate]")?.removeAttribute("hidden");
+      }
+
+      function closeVideoGate() {
+        document.body.classList.remove("em-modal-open");
+        document.querySelector("[data-video-gate]")?.setAttribute("hidden", "");
+      }
+
+      function unlockVideo() {
+        var video = getGatedVideo();
+        var videoFrame = document.querySelector("[data-video-frame]");
+
+        isVideoUnlocked = true;
+        closeVideoGate();
+        videoFrame?.classList.remove("is-locked");
+        videoFrame?.classList.add("is-unlocked");
+
+        if (video) {
+          video.controls = true;
+
+          if (shouldPlayAfterSubmit) {
+            setTimeout(function () {
+              video.play();
+            }, 0);
+          }
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("[data-scroll-form]").forEach(function (button) {
+          button.addEventListener("click", scrollToForm);
+        });
+
+        document.querySelectorAll("[data-open-video-gate]").forEach(function (button) {
+          button.addEventListener("click", openVideoGate);
+        });
+
+        document.querySelectorAll("[data-close-video-gate]").forEach(function (button) {
+          button.addEventListener("click", closeVideoGate);
+        });
+
+        document.querySelector("[data-video-gate]")?.addEventListener("click", function (event) {
+          if (event.target === event.currentTarget) {
+            closeVideoGate();
+          }
+        });
+
+        document.querySelector("[data-video-gate-fallback]")?.addEventListener("submit", function (event) {
+          event.preventDefault();
+          unlockVideo();
+        });
+
+        document.querySelectorAll(".hubspot-fallback-form:not([data-video-gate-fallback])").forEach(function (form) {
+          form.addEventListener("submit", unlockVideo);
+        });
+
+        var video = getGatedVideo();
+        video?.addEventListener("play", function () {
+          if (!isVideoUnlocked) {
+            video.pause();
+            openVideoGate();
+          }
+        });
+
+        if (window.hbspt) {
+          setTimeout(function () {
+            document.querySelectorAll("[data-hubspot-form]").forEach(function (formContainer) {
+              window.hbspt.forms.create({
+                portalId: "20309062",
+                formId: "1619a5c0-b261-4f44-b084-5f4fd2ca4d4f",
+                region: "na1",
+                target: "#" + formContainer.id,
+                onFormSubmitted: unlockVideo
+              });
+            });
+          }, 1000);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <main class="em-page">
+      <header class="em-hero" id="top">
+        <nav class="em-nav" aria-label="Primary">
+          <a class="em-logo-link" href="https://www.tascoutsourcing.com/" aria-label="TASC home">
+            <img class="em-logo" src="src/assets/2b3412e8fe117b35199bad27286347d3bc75c3be.png" alt="TASC" />
+          </a>
+          <div class="em-nav-actions">
+            <button type="button" data-open-video-gate>Watch briefing</button>
+            <button type="button" data-scroll-form>Book advisory call</button>
+          </div>
+        </nav>
+
+        <section class="em-hero-grid">
+          <div class="em-hero-copy">
+            <p class="em-eyebrow">Emiratisation 2026 briefing</p>
+            <h1>Emiratisation in 2026 Has Changed. Has Your Hiring Plan?</h1>
+            <p class="em-hero-lede">
+              NAFIS now runs to 2040, the salary floor sits at AED 6,000, and
+              companies with 20 staff are in scope. We sat down with
+              public-sector leader Huda Al Hashemi to explain what every
+              employer in the UAE needs to do before the next deadline.
+            </p>
+            <div class="em-hero-actions">
+              <button type="button" class="em-primary" data-scroll-form>
+                Book a free workforce advisory call
+              </button>
+              <button type="button" class="em-secondary" data-open-video-gate>Watch the conversation</button>
+            </div>
+            <aside class="em-deadline-panel" aria-label="2026 Emiratisation deadlines">
+              <span>2026 targets</span>
+              <strong>+1% by June</strong>
+              <strong>+1% by year end</strong>
+              <p>Planning now is cheaper than rushing when penalties land.</p>
+            </aside>
+          </div>
+
+          <div class="em-form-panel em-hero-form">
+            <h3>Book your free advisory call</h3>
+            <p>Share a few details and the TASC Emiratisation team will help you map your 2026 obligations.</p>
+            <div id="hubspot-form-container-hero" data-hubspot-form>
+              <form class="hubspot-fallback-form" action="mailto:marketing@tascoutsourcing.com" method="post">
+                <label>
+                  Name
+                  <input name="name" type="text" autocomplete="name" required />
+                </label>
+                <label>
+                  Work email
+                  <input name="email" type="email" autocomplete="email" required />
+                </label>
+                <label>
+                  Company
+                  <input name="company" type="text" autocomplete="organization" required />
+                </label>
+                <label>
+                  Message
+                  <textarea name="message" rows="3" required>I would like to book a free Emiratisation advisory call.</textarea>
+                </label>
+                <button type="submit">Request a call</button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </header>
+
+      <section class="em-intro em-section">
+        <div class="em-container em-narrow">
+          <p>
+            Most managers still treat Emiratisation as a hiring target to clear
+            before year-end. That view is now a liability.
+          </p>
+          <p>
+            Over the past twelve months the framework has grown into a full
+            system that ties together compliance, family benefits, pension
+            contributions and workforce planning. The Ministry has added AI to
+            its monitoring, the salary floor has moved, and smaller businesses
+            that once sat outside the rules are now firmly inside them.
+          </p>
+          <p>
+            We invited Huda Al Hashemi, an Emirati public-sector leader who
+            works closely on private-sector talent, to walk through what
+            actually changed and what it means for the people running UAE
+            businesses. Watch the full conversation below, then talk to our team
+            about where you stand.
+          </p>
+        </div>
+      </section>
+
+      <section class="em-video-section em-section" id="briefing">
+        <div class="em-container">
+          <div class="em-section-heading">
+            <p class="em-eyebrow">Watch</p>
+            <h2>The 2026 Emiratisation Briefing</h2>
+            <p>
+              A 20-minute conversation with Huda Al Hashemi on NAFIS,
+              penalties, the new benefits package and the compliant way to hire
+              Emirati talent at speed.
+            </p>
+          </div>
+
+          <div class="em-video-grid">
+            <div class="em-video-frame is-locked" data-video-frame>
+              <video
+                data-gated-video
+                playsinline
+                preload="metadata"
+                poster="public/emiratisation-2026/emiratisation-briefing-poster.jpg"
+              >
+                <source src="public/emiratisation-2026/uae-emiratisation-benefits-penalties.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <button
+                type="button"
+                class="em-video-lock"
+                data-open-video-gate
+                aria-label="Unlock and watch the Emiratisation briefing"
+              >
+                <span>Watch the conversation</span>
+              </button>
+            </div>
+
+            <div class="em-learnings">
+              <h3>What you'll learn</h3>
+              <ul>
+                <li>Why NAFIS is now a national agenda item running to 2040, not a short-term scheme.</li>
+                <li>The two deadlines employers are working against: 1% by end of June and another 1% before the end of 2026.</li>
+                <li>How the Ministry uses AI to spot fake Emiratisation, and why on-paper hires no longer go unnoticed.</li>
+                <li>What the new family benefits package changes for Emirati employees and their families.</li>
+                <li>The penalties: AED 9,000 per month for every unfilled role, and AED 100,000 to AED 500,000 for violations.</li>
+                <li>How the workforce-partner model lets you hire Emirati talent quickly while staying fully compliant.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="em-modal-backdrop" data-video-gate role="dialog" aria-modal="true" aria-labelledby="video-gate-title" hidden>
+        <div class="em-form-panel em-video-gate">
+          <button type="button" class="em-modal-close" data-close-video-gate aria-label="Close video form">x</button>
+          <h3 id="video-gate-title">Watch the full conversation</h3>
+          <p>Share your details to unlock the 2026 Emiratisation briefing.</p>
+          <div id="hubspot-form-container-video" data-hubspot-form data-video-unlock-form>
+            <form class="hubspot-fallback-form" data-video-gate-fallback action="mailto:marketing@tascoutsourcing.com" method="post">
+              <label>
+                Name
+                <input name="name" type="text" autocomplete="name" required />
+              </label>
+              <label>
+                Work email
+                <input name="email" type="email" autocomplete="email" required />
+              </label>
+              <label>
+                Company
+                <input name="company" type="text" autocomplete="organization" required />
+              </label>
+              <label>
+                Message
+                <textarea name="message" rows="3" required>I would like to watch the Emiratisation briefing.</textarea>
+              </label>
+              <button type="submit">Unlock video</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <section class="em-section em-facts">
+        <div class="em-container">
+          <div class="em-section-heading">
+            <p class="em-eyebrow">The numbers that matter</p>
+            <h2>What employers need to plan around now</h2>
+          </div>
+
+          <div class="em-fact-grid">
+            <article class="em-fact-card">
+              <strong>2040</strong>
+              <p>NAFIS is now part of the UAE's long-term national agenda, not a short-term programme.</p>
+            </article>
+            <article class="em-fact-card">
+              <strong>AED 6,000</strong>
+              <p>The minimum monthly salary for Emiratis in the private sector.</p>
+            </article>
+            <article class="em-fact-card">
+              <strong>20+ employees</strong>
+              <p>Companies of this size now carry Emiratisation obligations.</p>
+            </article>
+            <article class="em-fact-card">
+              <strong>+1% +1%</strong>
+              <p>A 1% increase by June and another 1% before the end of 2026.</p>
+            </article>
+            <article class="em-fact-card">
+              <strong>AED 9,000 / month</strong>
+              <p>The cost of leaving a single Emirati position unfilled, adding up to over AED 100,000 a year.</p>
+            </article>
+            <article class="em-fact-card">
+              <strong>AED 100k-500k</strong>
+              <p>The fine range for violations such as fake Emiratisation.</p>
+            </article>
+            <article class="em-fact-card">
+              <strong>AED 3,000 / child</strong>
+              <p>Monthly family support, now uncapped and extended to children of Emirati mothers.</p>
+            </article>
+            <article class="em-fact-card">
+              <strong>Up to 80%</strong>
+              <p>Discounts on selected Ministry fees for Emiratisation Partners Club members.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="em-partner em-section">
+        <div class="em-container em-split">
+          <div>
+            <p class="em-eyebrow">The compliant way to hire</p>
+            <h2>Fast Emirati hiring does not have to mean risky hiring.</h2>
+          </div>
+          <div class="em-copy-stack">
+            <p>
+              Many companies still believe they have to choose between hiring
+              Emirati talent fast and hiring it properly. They do not.
+            </p>
+            <p>
+              Working with a workforce partner lets you keep your focus on the
+              business while the sourcing, NAFIS and pension registration,
+              contracts and onboarding run through one provider. The Emirati
+              employee holds a genuine role and draws a real monthly salary, so
+              the arrangement sits fully within Ministry rules. What you gain is
+              speed and a lighter load on your internal team.
+            </p>
+            <p>
+              That is the model TASC has used to bring Emirati professionals
+              into the private sector for years, alongside our work on the
+              Emiratisation Summit, the Emiratisation Guidebook and
+              career-guidance programmes with NAFIS and other national bodies.
+            </p>
+            <button type="button" class="em-primary" data-scroll-form>
+              Talk to our Emiratisation team
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="em-cta em-section" id="advisory-call">
+        <div class="em-container em-cta-band">
+          <div>
+            <p class="em-eyebrow">Free workforce advisory call</p>
+            <h2>Know where you stand before the deadline finds you.</h2>
+            <p>
+              The companies that handle this well are the ones planning now, not
+              the ones rushing in November. Book a free workforce advisory call
+              and we will help you read your current position, map the targets
+              that apply to your business, and lay out the most effective path
+              to meet them.
+            </p>
+            <div class="em-form-panel em-cta-form">
+              <h3>Book your free advisory call</h3>
+              <div id="hubspot-form-container-cta" data-hubspot-form>
+                <form class="hubspot-fallback-form" action="mailto:marketing@tascoutsourcing.com" method="post">
+                  <label>
+                    Name
+                    <input name="name" type="text" autocomplete="name" required />
+                  </label>
+                  <label>
+                    Work email
+                    <input name="email" type="email" autocomplete="email" required />
+                  </label>
+                  <label>
+                    Company
+                    <input name="company" type="text" autocomplete="organization" required />
+                  </label>
+                  <label>
+                    Message
+                    <textarea name="message" rows="3" required>I would like to book a free Emiratisation advisory call.</textarea>
+                  </label>
+                  <button type="submit">Request a call</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="em-section em-faq">
+        <div class="em-container">
+          <div class="em-section-heading">
+            <p class="em-eyebrow">FAQ</p>
+            <h2>Common Emiratisation questions for 2026</h2>
+          </div>
+          <div class="em-faq-list">
+            <details>
+              <summary>What is fake Emiratisation?</summary>
+              <p>It is when an Emirati employee exists only on paper, with no real role or responsibilities, purely to satisfy a quota. The Ministry now uses AI to detect these arrangements, and penalties run from AED 100,000 to AED 500,000 per violation.</p>
+            </details>
+            <details>
+              <summary>Do Emiratisation rules apply to small companies?</summary>
+              <p>Yes. Businesses with 20 to 49 employees now have obligations and are expected to employ at least two Emirati nationals by the end of 2026.</p>
+            </details>
+            <details>
+              <summary>What does it cost to leave an Emirati role unfilled?</summary>
+              <p>AED 9,000 per month for each unfilled position, which adds up to more than AED 100,000 over a year.</p>
+            </details>
+            <details>
+              <summary>Is hiring through a workforce partner compliant?</summary>
+              <p>Yes, as long as the employee holds a legitimate role and receives a real monthly salary. The partner handles the administration; the employee does genuine work.</p>
+            </details>
+            <details>
+              <summary>What's new in the NAFIS benefits package?</summary>
+              <p>Family support is now uncapped rather than limited to four children, extended to the children of Emirati mothers, and AED 3,000 per child is paid monthly. Spouses of Emirati citizens working in the private sector are now included too.</p>
+            </details>
+            <details>
+              <summary>What are the Emiratisation targets for 2026?</summary>
+              <p>A 1% increase by the end of June and a further 1% before the end of 2026.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

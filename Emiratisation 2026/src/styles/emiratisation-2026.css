@@ -1,0 +1,785 @@
+.em-page {
+  --em-navy: #003f5c;
+  --em-deep: #001f31;
+  --em-blue: #00bfff;
+  --em-green: #56db46;
+  --em-yellow: #ffe102;
+  --em-ink: #07324a;
+  --em-muted: #5d7180;
+  --em-line: rgba(0, 95, 131, 0.14);
+  --em-soft: #f3faf8;
+  background: #ffffff;
+  color: var(--em-ink);
+  font-family: Poppins, Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.em-page * {
+  box-sizing: border-box;
+}
+
+.em-page p,
+.em-page h1,
+.em-page h2,
+.em-page h3,
+.em-page li,
+.em-page strong {
+  overflow-wrap: anywhere;
+}
+
+.em-page button,
+.em-page a {
+  font: inherit;
+}
+
+.em-page button {
+  cursor: pointer;
+}
+
+.em-container {
+  width: min(1160px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.em-narrow {
+  width: min(900px, calc(100% - 40px));
+}
+
+.em-section {
+  padding: 92px 0;
+}
+
+.em-hero {
+  min-height: min(92vh, 900px);
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+  background:
+    linear-gradient(115deg, rgba(0, 31, 49, 0.96), rgba(0, 63, 92, 0.84) 52%, rgba(0, 95, 131, 0.56)),
+    url("../../ChatGPT Image Jun 8, 2026, 03_40_18 PM.png") center / cover;
+  position: relative;
+  overflow: hidden;
+}
+
+.em-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 9px;
+  background: linear-gradient(90deg, var(--em-blue), var(--em-green), var(--em-yellow));
+}
+
+.em-nav {
+  position: relative;
+  z-index: 1;
+  width: min(1240px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 26px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.em-logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.em-logo {
+  width: 118px;
+  height: auto;
+  display: block;
+}
+
+.em-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.em-nav-actions a,
+.em-nav-actions button,
+.em-secondary,
+.em-primary {
+  min-height: 48px;
+  border-radius: 999px;
+  padding: 12px 20px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.em-nav-actions a,
+.em-secondary {
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.52);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.em-nav-actions button,
+.em-primary {
+  border: 0;
+  color: #ffffff;
+  background: linear-gradient(92deg, var(--em-blue), var(--em-green));
+  box-shadow: 0 16px 38px rgba(0, 191, 255, 0.18);
+}
+
+.em-hero-grid {
+  position: relative;
+  z-index: 1;
+  width: min(1240px, calc(100% - 40px));
+  margin: auto auto 62px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 430px);
+  gap: 48px;
+  align-items: center;
+}
+
+.em-hero-copy {
+  max-width: 830px;
+  padding-top: 70px;
+  min-width: 0;
+}
+
+.em-eyebrow {
+  margin: 0 0 14px;
+  color: var(--em-yellow);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.em-hero h1,
+.em-section h2 {
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.em-hero h1 {
+  max-width: 780px;
+  font-size: clamp(2.75rem, 6vw, 5.6rem);
+  line-height: 0.96;
+  overflow-wrap: break-word;
+}
+
+.em-hero-lede {
+  max-width: 760px;
+  margin: 26px 0 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(1.05rem, 1.65vw, 1.28rem);
+  line-height: 1.65;
+}
+
+.em-hero-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.em-deadline-panel {
+  margin-top: 30px;
+  max-width: 620px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 31, 49, 0.74);
+  backdrop-filter: blur(18px);
+  border-radius: 8px;
+  padding: 28px;
+  min-width: 0;
+}
+
+.em-deadline-panel span,
+.em-deadline-panel p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.em-deadline-panel span {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.em-deadline-panel strong {
+  display: inline-block;
+  color: #ffffff;
+  font-size: 1.55rem;
+  line-height: 1.08;
+  margin-right: 22px;
+}
+
+.em-deadline-panel strong + strong {
+  color: var(--em-yellow);
+}
+
+.em-deadline-panel p {
+  margin: 16px 0 0;
+  line-height: 1.55;
+}
+
+.em-intro {
+  background: #ffffff;
+}
+
+.em-intro p {
+  margin: 0;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  line-height: 1.72;
+}
+
+.em-intro p + p {
+  margin-top: 26px;
+}
+
+.em-video-section {
+  background: var(--em-deep);
+  color: #ffffff;
+}
+
+.em-section-heading {
+  max-width: 800px;
+  margin-bottom: 40px;
+}
+
+.em-section-heading h2,
+.em-partner h2,
+.em-cta h2 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.08;
+}
+
+.em-section-heading p:not(.em-eyebrow),
+.em-copy-stack p,
+.em-cta p {
+  color: var(--em-muted);
+  font-size: 1.02rem;
+  line-height: 1.72;
+}
+
+.em-video-section .em-section-heading p:not(.em-eyebrow),
+.em-video-section .em-learnings li {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.em-video-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.em-video-frame {
+  min-width: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000000;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+
+.em-video-frame video {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.em-video-frame.is-locked video {
+  filter: brightness(0.52);
+  pointer-events: none;
+}
+
+.em-video-frame.is-unlocked .em-video-lock {
+  display: none;
+}
+
+.em-video-lock {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  border: 0;
+  color: #ffffff;
+  background: linear-gradient(180deg, rgba(0, 31, 49, 0.08), rgba(0, 31, 49, 0.54));
+}
+
+.em-video-lock span {
+  min-height: 56px;
+  border-radius: 999px;
+  padding: 15px 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(92deg, var(--em-blue), var(--em-green));
+  box-shadow: 0 16px 38px rgba(0, 191, 255, 0.24);
+  font-weight: 700;
+}
+
+.em-learnings {
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 28px;
+  min-width: 0;
+}
+
+.em-learnings ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 16px;
+}
+
+.em-learnings h3,
+.em-form-panel h3 {
+  margin: 0 0 18px;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.em-learnings ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.em-learnings li {
+  position: relative;
+  padding-left: 24px;
+  line-height: 1.55;
+}
+
+.em-learnings li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--em-yellow);
+}
+
+.em-learnings li + li {
+  margin-top: 0;
+}
+
+.em-facts {
+  background: var(--em-soft);
+}
+
+.em-fact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.em-fact-card {
+  min-height: 186px;
+  border: 1px solid var(--em-line);
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.em-fact-card strong {
+  display: block;
+  color: var(--em-navy);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.1;
+}
+
+.em-fact-card p {
+  margin: 20px 0 0;
+  color: var(--em-muted);
+  line-height: 1.55;
+}
+
+.em-partner {
+  background: #ffffff;
+}
+
+.em-split {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.88fr) minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
+}
+
+.em-partner h2 {
+  color: var(--em-navy);
+}
+
+.em-copy-stack p {
+  margin: 0;
+}
+
+.em-copy-stack {
+  min-width: 0;
+}
+
+.em-copy-stack p + p {
+  margin-top: 20px;
+}
+
+.em-copy-stack .em-primary {
+  margin-top: 28px;
+}
+
+.em-cta {
+  background:
+    linear-gradient(120deg, rgba(0, 31, 49, 0.96), rgba(0, 95, 131, 0.9)),
+    url("../../ChatGPT Image Jun 8, 2026, 03_40_18 PM.png") center / cover;
+  color: #ffffff;
+}
+
+.em-cta-band {
+  max-width: 960px;
+}
+
+.em-cta p {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.em-form-panel {
+  border-radius: 8px;
+  background: #ffffff;
+  color: var(--em-ink);
+  padding: 30px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.2);
+  min-width: 0;
+}
+
+.em-hero-form {
+  align-self: center;
+}
+
+.em-cta-form {
+  width: min(100%, 520px);
+  margin-top: 30px;
+}
+
+.em-hero-form p {
+  margin: -6px 0 20px;
+  color: var(--em-muted);
+  line-height: 1.55;
+}
+
+.em-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(0, 31, 49, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.em-modal-backdrop[hidden] {
+  display: none;
+}
+
+.em-modal-open {
+  overflow: hidden;
+}
+
+.em-video-gate {
+  position: relative;
+  width: min(520px, 100%);
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+}
+
+.em-video-gate p {
+  margin: -6px 0 20px;
+  color: var(--em-muted);
+  line-height: 1.55;
+}
+
+.em-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(0, 95, 131, 0.18);
+  border-radius: 50%;
+  color: var(--em-navy);
+  background: #ffffff;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hubspot-fallback-form {
+  display: grid;
+  gap: 14px;
+}
+
+.hubspot-fallback-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--em-navy);
+  font-size: 0.88rem;
+}
+
+.hubspot-fallback-form input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(0, 95, 131, 0.28);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+
+.hubspot-fallback-form textarea {
+  width: 100%;
+  min-height: 86px;
+  resize: vertical;
+  border: 1px solid rgba(0, 95, 131, 0.28);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.hubspot-fallback-form button {
+  min-height: 48px;
+  border: 0;
+  border-radius: 999px;
+  color: #ffffff;
+  background: linear-gradient(92deg, var(--em-blue), var(--em-green));
+}
+
+[data-hubspot-form] .hbspt-form,
+[data-hubspot-form] .hs-form {
+  font-family: inherit;
+  width: 100%;
+}
+
+[data-hubspot-form] .hs-form fieldset,
+[data-hubspot-form] .hs-form .form-columns-1,
+[data-hubspot-form] .hs-form .form-columns-2,
+[data-hubspot-form] .hs-form .form-columns-3 {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 12px !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+[data-hubspot-form] .hs-form .field,
+[data-hubspot-form] .hs-form .hs-form-field,
+[data-hubspot-form] .hs-form .hs-dependent-field,
+[data-hubspot-form] .hs-form .hs-input {
+  box-sizing: border-box !important;
+}
+
+[data-hubspot-form] .hs-form .field,
+[data-hubspot-form] .hs-form .hs-form-field {
+  float: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 0 12px !important;
+  padding: 0 !important;
+}
+
+[data-hubspot-form] .hs-form label {
+  display: block;
+  margin: 0 0 6px;
+  color: var(--em-navy);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+[data-hubspot-form] .hs-form .input {
+  margin: 0 !important;
+}
+
+[data-hubspot-form] .hs-form input,
+[data-hubspot-form] .hs-form select,
+[data-hubspot-form] .hs-form textarea,
+[data-hubspot-form] .hs-form .hs-input {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 42px;
+  border: 1px solid rgba(0, 95, 131, 0.28) !important;
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--em-ink);
+  font: inherit;
+}
+
+[data-hubspot-form] .hs-form textarea {
+  min-height: 74px;
+}
+
+[data-hubspot-form] .hs-submit,
+[data-hubspot-form] .actions {
+  margin: 4px 0 0 !important;
+  padding: 0 !important;
+}
+
+[data-hubspot-form] .hs-button {
+  width: 100%;
+  min-height: 48px;
+  border: 0 !important;
+  border-radius: 999px;
+  color: #ffffff;
+  background: linear-gradient(92deg, var(--em-blue), var(--em-green));
+  font-weight: 700;
+}
+
+[data-hubspot-form] ul,
+[data-hubspot-form] li {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  list-style: none !important;
+}
+
+.em-faq {
+  background: #ffffff;
+}
+
+.em-faq-list {
+  display: grid;
+  gap: 12px;
+}
+
+.em-faq details {
+  border: 1px solid var(--em-line);
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 20px 22px;
+}
+
+.em-faq summary {
+  color: var(--em-navy);
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.em-faq details p {
+  margin: 14px 0 0;
+  color: var(--em-muted);
+  line-height: 1.66;
+}
+
+@media (max-width: 980px) {
+  .em-section {
+    padding: 72px 0;
+  }
+
+  .em-nav {
+    align-items: flex-start;
+  }
+
+  .em-nav-actions a {
+    display: none;
+  }
+
+  .em-hero-grid,
+  .em-video-grid,
+  .em-split,
+  .em-hero-grid {
+    gap: 34px;
+    margin-bottom: 56px;
+  }
+
+  .em-deadline-panel {
+    max-width: 460px;
+  }
+
+  .em-learnings ul {
+    grid-template-columns: 1fr;
+  }
+
+  .em-fact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .em-container,
+  .em-narrow,
+  .em-nav,
+  .em-hero-grid {
+    width: calc(100% - 28px);
+    max-width: 362px;
+    margin-left: 14px;
+    margin-right: auto;
+  }
+
+  .em-section {
+    padding: 58px 0;
+  }
+
+  .em-hero {
+    min-height: auto;
+  }
+
+  .em-logo {
+    width: 96px;
+  }
+
+  .em-nav-actions button {
+    display: none;
+  }
+
+  .em-hero-copy {
+    padding-top: 44px;
+  }
+
+  .em-hero h1 {
+    font-size: 2.25rem;
+    line-height: 1.04;
+  }
+
+  .em-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .em-primary,
+  .em-secondary {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .em-fact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .em-fact-card {
+    min-height: 150px;
+  }
+
+  .em-form-panel,
+  .em-learnings,
+  .em-deadline-panel {
+    padding: 22px;
+  }
+
+  .em-deadline-panel strong {
+    display: block;
+    margin-right: 0;
+  }
+
+  .em-deadline-panel strong + strong {
+    margin-top: 8px;
+  }
+}
