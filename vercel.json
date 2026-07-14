@@ -1,0 +1,33 @@
+{
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/grc",
+      "destination": "/grc/",
+      "permanent": false
+    },
+    {
+      "source": "/emiratisation-webinar",
+      "destination": "/emiratisation-webinar/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/grc/",
+      "destination": "/GRC/index.html"
+    },
+    {
+      "source": "/grc/:path*",
+      "destination": "/GRC/:path*"
+    },
+    {
+      "source": "/emiratisation-webinar/",
+      "destination": "/Emiratisation 2026/index.html"
+    },
+    {
+      "source": "/emiratisation-webinar/:path*",
+      "destination": "/Emiratisation 2026/:path*"
+    }
+  ]
+}

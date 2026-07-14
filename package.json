@@ -1,0 +1,14 @@
+{
+  "name": "tasc-uae-lp",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  },
+  "dependencies": {
+    "vite": "6.3.5",
+    "typescript": "5.8.3"
+  }
+}
