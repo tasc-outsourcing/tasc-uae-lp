@@ -15,19 +15,19 @@
   "rewrites": [
     {
       "source": "/grc/",
-      "destination": "/GRC/index.html"
+      "destination": "/grc/index.html"
     },
     {
       "source": "/grc/:path*",
-      "destination": "/GRC/:path*"
+      "destination": "/grc/:path*"
     },
     {
       "source": "/emiratisation-webinar/",
-      "destination": "/Emiratisation 2026/index.html"
+      "destination": "/emiratisation-webinar/index.html"
     },
     {
       "source": "/emiratisation-webinar/:path*",
-      "destination": "/Emiratisation 2026/:path*"
+      "destination": "/emiratisation-webinar/:path*"
     }
   ]
 }
