@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "npm --prefix \"Tech Recruitment\" run build && vite build && node scripts/prepare-dist.mjs",
+    "build": "npm --prefix \"Tech Recruitment\" ci --include=dev && npm --prefix \"Tech Recruitment\" run build && vite build && node scripts/prepare-dist.mjs",
     "dev": "vite"
   },
   "dependencies": {
