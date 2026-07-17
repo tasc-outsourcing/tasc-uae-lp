@@ -10,6 +10,11 @@
       "source": "/emiratisation-webinar",
       "destination": "/emiratisation-webinar/",
       "permanent": false
+    },
+    {
+      "source": "/it-recruitment-agency-in-dubai",
+      "destination": "/it-recruitment-agency-in-dubai/",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -28,6 +33,14 @@
     {
       "source": "/emiratisation-webinar/:path*",
       "destination": "/emiratisation-webinar/:path*"
+    },
+    {
+      "source": "/it-recruitment-agency-in-dubai/",
+      "destination": "/it-recruitment-agency-in-dubai/index.html"
+    },
+    {
+      "source": "/it-recruitment-agency-in-dubai/:path*",
+      "destination": "/it-recruitment-agency-in-dubai/:path*"
     }
   ]
 }

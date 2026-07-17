@@ -14,6 +14,10 @@ export default defineConfig({
           {
             route: "/emiratisation-webinar",
             source: "/Emiratisation%202026"
+          },
+          {
+            route: "/it-recruitment-agency-in-dubai",
+            source: "/Tech%20Recruitment/dist"
           }
         ];
 

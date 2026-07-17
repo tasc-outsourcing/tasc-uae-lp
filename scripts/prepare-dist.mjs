@@ -1,4 +1,4 @@
-import { rename, rm } from "node:fs/promises";
+import { cp, rename, rm } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const distDir = resolve("dist");
@@ -26,3 +26,8 @@ for (const { sourceDir, tempDir, targetDir } of routeMoves) {
     await rename(sourceDir, targetDir);
   }
 }
+
+await rm(resolve(distDir, "it-recruitment-agency-in-dubai"), { force: true, recursive: true });
+await cp(resolve("Tech Recruitment", "dist"), resolve(distDir, "it-recruitment-agency-in-dubai"), {
+  recursive: true
+});
