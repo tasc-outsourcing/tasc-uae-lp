@@ -15,6 +15,11 @@
       "source": "/it-recruitment-agency-in-dubai",
       "destination": "/it-recruitment-agency-in-dubai/",
       "permanent": false
+    },
+    {
+      "source": "/grc-recruitment",
+      "destination": "/grc-recruitment/",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -41,6 +46,14 @@
     {
       "source": "/it-recruitment-agency-in-dubai/:path*",
       "destination": "/it-recruitment-agency-in-dubai/:path*"
+    },
+    {
+      "source": "/grc-recruitment/",
+      "destination": "/grc-recruitment/index.html"
+    },
+    {
+      "source": "/grc-recruitment/:path*",
+      "destination": "/grc-recruitment/:path*"
     }
   ]
 }

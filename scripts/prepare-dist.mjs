@@ -31,3 +31,8 @@ await rm(resolve(distDir, "it-recruitment-agency-in-dubai"), { force: true, recu
 await cp(resolve("Tech Recruitment", "dist"), resolve(distDir, "it-recruitment-agency-in-dubai"), {
   recursive: true
 });
+
+await rm(resolve(distDir, "grc-recruitment"), { force: true, recursive: true });
+await cp(resolve("GRC Recruitment", "dist"), resolve(distDir, "grc-recruitment"), {
+  recursive: true
+});

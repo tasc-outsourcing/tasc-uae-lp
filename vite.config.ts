@@ -18,6 +18,10 @@ export default defineConfig({
           {
             route: "/it-recruitment-agency-in-dubai",
             source: "/Tech%20Recruitment/dist"
+          },
+          {
+            route: "/grc-recruitment",
+            source: "/GRC%20Recruitment/dist"
           }
         ];
 
