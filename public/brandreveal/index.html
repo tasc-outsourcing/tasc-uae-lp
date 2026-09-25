@@ -44,12 +44,31 @@ body.film #film{height:100vh}
 .hook{max-width:1100px}
 .hook .l1{font-size:clamp(30px,5.2vw,74px);font-weight:800;line-height:1.08;letter-spacing:-.02em}
 .hook .l2{font-size:clamp(30px,5.2vw,74px);font-weight:400;line-height:1.08;letter-spacing:-.02em;color:var(--ember);margin-top:.25em}
+.hook .slot{display:grid}
+.hook .slot > *{grid-area:1/1;align-self:start}
+.choice{display:flex;justify-content:center;gap:14px;margin-top:clamp(28px,4vw,48px);pointer-events:auto}
+.choice button{display:inline-flex;align-items:center;gap:14px;min-width:250px;padding:14px 22px 14px 16px;border:1px solid rgba(51,46,42,.28);background:transparent;color:var(--ink);font-family:inherit;text-align:left;cursor:pointer;transition:background .2s,border-color .2s}
+.choice button:hover{border-color:var(--ink)}
+.choice button:focus-visible{outline:2px solid var(--ember);outline-offset:3px}
+.choice button.play{background:var(--ink);border-color:var(--ink);color:var(--cream)}
+.choice button.play:hover{background:#1B1816}
+.choice .ic{flex:none;width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center}
+.choice .play .ic{background:var(--ember)}
+.choice .play .ic::after{content:"";margin-left:3px;border-left:11px solid var(--cream);border-top:7px solid transparent;border-bottom:7px solid transparent}
+.choice .scroll .ic{border:1px solid rgba(51,46,42,.28)}
+.choice .scroll .ic::after{content:"";width:8px;height:8px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:translateY(-2px) rotate(45deg);animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{0%,100%{translate:0 0}50%{translate:0 4px}}
+.choice b{display:block;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.choice small{display:block;font-size:13px;margin-top:4px;opacity:.7}
+@media(max-width:600px){.choice{flex-direction:column;align-items:center}.choice button{width:min(100%,300px);min-width:0}}
+body.film .choice{display:none}
 
 .simp{position:absolute;left:0;right:0;bottom:9vh;font-size:clamp(20px,2.6vw,36px);font-weight:600;letter-spacing:-.01em;color:var(--ink)}
 
 .tick{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(44px,9vw,132px);letter-spacing:-.035em;line-height:1;font-weight:400;color:var(--ink)}
 .tick .win{height:1.3em;overflow:hidden;position:relative}
-.tick .col{display:flex;flex-direction:column;align-items:flex-end;will-change:transform}
+.tick .win:first-child{display:flex;justify-content:flex-end}
+.tick .col{display:flex;flex-direction:column;align-items:flex-end;flex:none;will-change:transform}
 .tick span{height:1.3em;line-height:1.3em;display:block;white-space:nowrap}
 .tick .suf{font-weight:800;margin-left:.02em}
 .tick .ai{font-weight:400;opacity:0;color:var(--ember)}
@@ -61,7 +80,7 @@ body.film #film{height:100vh}
 .hint{position:absolute;left:0;right:0;bottom:28px;text-align:center;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);pointer-events:none}
 .hint i{display:block;width:1px;height:34px;background:var(--ink);margin:10px auto 0;opacity:.35;animation:drop 1.8s ease-in-out infinite}
 @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-body.film .hint{display:none}
+body.film .hint,.hint{display:none}
 
 /* ---------- SECTIONS ---------- */
 section.dark{background:var(--stage);color:var(--cream)}
@@ -153,7 +172,13 @@ body.film .watch{display:none}
     <div class="layer">
       <div class="hook" id="hook">
         <div class="l1" id="hookL1">Software can be built in minutes now.</div>
-        <div class="l2" id="hookL2">What's scarce?</div>
+        <div class="slot">
+          <div class="l2" id="hookL2">What's scarce?</div>
+          <div class="choice" id="choice">
+            <button class="play" id="choicePlay" type="button"><span class="ic"></span><span><b>Play the film</b><small>30 seconds, sound on</small></span></button>
+            <button class="scroll" id="choiceScroll" type="button"><span class="ic"></span><span><b>Scroll to reveal</b><small>Take it at your own pace</small></span></button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -273,6 +298,7 @@ body.film .watch{display:none}
   const labA=$('labA'), labB=$('labB');
   const labAt=['labA1','labA2','labA3'].map($), labBt=['labB1','labB2','labB3'].map($);
   const hook=$('hook'), hookL1=$('hookL1'), hookL2=$('hookL2');
+  const choice=$('choice'), watch=$('watch');
   const simp=$('simp'), tick=$('tick'), col=$('col'), ai=$('ai'), tag=$('tag'), tag1=$('tag1'), tag2=$('tag2'), hint=$('hint');
   const isFilm=/[?&]film/.test(location.search);
   if(isFilm) document.body.classList.add('film');
@@ -292,7 +318,11 @@ body.film .watch{display:none}
     Wv = W/K;
     svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
     gS.setAttribute('transform',`translate(${W/2} 450) scale(${K}) translate(${-Wv/2} -450)`);
+    wordW=words.map(s=>s.getBoundingClientRect().width);
   }
+  // Ticker window tracks the current word's width so the wordmark stays centred
+  const words=[...col.children], win0=col.parentNode;
+  let wordW=[];
   const R=236;                       // ellipse rx
   const BW=470;                      // squircle width
 
@@ -302,6 +332,12 @@ body.film .watch{display:none}
     hook.style.opacity=1; hookL1.style.opacity=h1*hOut; hookL1.style.transform=`translateY(${(1-h1)*14}px)`;
     hookL2.style.opacity=h2*hOut; hookL2.style.transform=`translateY(${(1-h2)*14}px)`;
     hint.style.opacity=1-seg(p,0,.05);
+    // entry choice gives way to "What's scarce?"; the corner button takes over
+    const cOut=seg(p,0,.035);
+    choice.style.opacity=1-cOut; choice.style.transform=`translateY(${-cOut*10}px)`;
+    choice.style.visibility=cOut>.98?'hidden':'visible';
+    const wIn=seg(p,.03,.07);
+    watch.style.opacity=wIn; watch.style.pointerEvents=wIn>.5?'auto':'none';
 
     // ---- 2. Shapes enter (.16 - .34) apart, then 3. converge (.38 - .52)
     const enter=seg(p,.16,.34), conv=seg(p,.38,.52);
@@ -339,6 +375,8 @@ body.film .watch{display:none}
     const raw=tp*n, i=Math.floor(raw), f=raw-i;
     const idx=Math.min(n, i+ease(clamp(f*1.25,0,1)));
     col.style.transform=`translateY(${-idx*1.3}em)`;
+    const w0=Math.floor(idx), w1=Math.min(n,w0+1);
+    win0.style.width=lerp(wordW[w0],wordW[w1],idx-w0)+'px';
     ai.style.opacity=seg(p,.77,.81);
 
     // ---- 5. Dark stage (.82 - .90) + tagline
@@ -369,10 +407,18 @@ body.film .watch{display:none}
   window.addEventListener('scroll',fromScroll,{passive:true});
   window.addEventListener('resize',()=>{layout();fromScroll();});
   layout();
+  if(document.fonts) document.fonts.ready.then(()=>{layout();render(cur);});
 
   // film modal
   const modal=$('modal'), vid=$('film-video');
-  $('watch').addEventListener('click',e=>{e.preventDefault();modal.classList.add('on');vid.currentTime=0;vid.play().catch(()=>{});});
+  const openFilm=e=>{e.preventDefault();modal.classList.add('on');vid.currentTime=0;vid.play().catch(()=>{});};
+  watch.addEventListener('click',openFilm);
+  $('choicePlay').addEventListener('click',openFilm);
+  // nudge the reader into the story: scroll until "What's scarce?" is fully in
+  $('choiceScroll').addEventListener('click',()=>{
+    const total=film.offsetHeight-window.innerHeight;
+    window.scrollTo({top:film.offsetTop+total*.08,behavior:'smooth'});
+  });
   const closeM=()=>{modal.classList.remove('on');vid.pause();};
   $('closeModal').addEventListener('click',closeM);
   modal.addEventListener('click',e=>{if(e.target===modal)closeM();});
