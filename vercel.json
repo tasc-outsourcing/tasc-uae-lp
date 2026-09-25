@@ -20,6 +20,11 @@
       "source": "/grc-recruitment",
       "destination": "/grc-recruitment/",
       "permanent": false
+    },
+    {
+      "source": "/brandreveal",
+      "destination": "/brandreveal/",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -54,6 +59,34 @@
     {
       "source": "/grc-recruitment/:path*",
       "destination": "/grc-recruitment/:path*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/brandreveal(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/brandreveal/film.mp4",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        },
+        {
+          "key": "Accept-Ranges",
+          "value": "bytes"
+        }
+      ]
     }
   ]
 }

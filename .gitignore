@@ -10,3 +10,4 @@ dist/
 *.mp4
 *.mov
 !Emiratisation 2026/public/**/*.mp4
+!public/brandreveal/film.mp4
