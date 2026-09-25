@@ -33,13 +33,14 @@ body{font-family:'Manrope',system-ui,-apple-system,"Segoe UI",sans-serif;backgro
 body.film{overflow:hidden}
 a{color:inherit}
 
-/* ---------- FILM (sticky stage) ---------- */
-#film{height:760vh;position:relative}
+/* ---------- FILM (sticky stage, time-driven) ---------- */
+#film{height:900vh;position:relative}
 body.film #film{height:100vh}
 .stage{position:sticky;top:0;height:100vh;width:100%;overflow:hidden;background:var(--cream)}
 .stage svg{position:absolute;inset:0;width:100%;height:100%}
 .stage .layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 24px;pointer-events:none}
 .stage .layer > *{opacity:0;will-change:opacity,transform}
+.stage .cue{opacity:0;will-change:opacity,transform;display:inline-block}
 
 .hook{max-width:1100px}
 .hook .l1{font-size:clamp(30px,5.2vw,74px);font-weight:800;line-height:1.08;letter-spacing:-.02em}
@@ -63,7 +64,20 @@ body.film #film{height:100vh}
 @media(max-width:600px){.choice{flex-direction:column;align-items:center}.choice button{width:min(100%,300px);min-width:0}}
 body.film .choice{display:none}
 
-.simp{position:absolute;left:0;right:0;bottom:9vh;font-size:clamp(20px,2.6vw,36px);font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.eyebrow-stage{position:absolute;top:28px;left:32px;font-size:12px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--ochre);opacity:0}
+.eyebrow-stage.ma{color:var(--ink)}
+
+.cap{position:absolute;left:0;right:0;bottom:8vh;padding:0 6vw;text-align:center;font-size:clamp(19px,2.5vw,36px);font-weight:600;letter-spacing:-.012em;line-height:1.3;color:var(--ink);opacity:0}
+.cap .b{font-weight:800;display:block;font-size:1.25em;margin-bottom:.15em}
+.cap .cue{margin-right:.28em}
+
+.num{position:absolute;opacity:0;will-change:opacity,transform;color:var(--ink);text-align:left}
+.num .v{font-size:clamp(56px,9vw,150px);font-weight:800;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.num .lab{white-space:nowrap;font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);margin:8px 0}
+.num.n1{left:58%;top:50%;transform:translateY(-50%)}
+.num.n2{left:92%;top:50%;transform:translate(-50%,-50%);text-align:center}
+.num.n2 .v{color:var(--ink)}
+@media(max-width:700px){.num.n1{left:auto;right:16px;top:30%}.num.n2{left:auto;right:16px;top:16%;transform:none;text-align:right}}
 
 .tick{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:clamp(44px,9vw,132px);letter-spacing:-.035em;line-height:1;font-weight:400;color:var(--ink)}
 .tick .win{height:1.3em;overflow:hidden;position:relative}
@@ -74,13 +88,14 @@ body.film .choice{display:none}
 .tick .ai{font-weight:400;opacity:0;color:var(--ember)}
 
 .tag{position:absolute;left:0;right:0;top:calc(50% + clamp(44px,7.5vw,110px));text-align:center}
-.tag .t1{font-size:clamp(18px,2.4vw,32px);font-weight:600;letter-spacing:-.01em;color:var(--cream)}
-.tag .t2{font-size:clamp(12px,1.1vw,15px);font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--mute-dark);margin-top:18px}
+.tag .t1{font-size:clamp(18px,2.4vw,32px);font-weight:600;letter-spacing:-.01em;color:var(--cream);opacity:0}
+.tag .t2{font-size:clamp(12px,1.1vw,15px);font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--mute-dark);margin-top:18px;opacity:0}
 
 .hint{position:absolute;left:0;right:0;bottom:28px;text-align:center;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);pointer-events:none}
 .hint i{display:block;width:1px;height:34px;background:var(--ink);margin:10px auto 0;opacity:.35;animation:drop 1.8s ease-in-out infinite}
 @keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 body.film .hint,.hint{display:none}
+@media(max-width:700px){.cap{bottom:6vh;padding:0 20px}.eyebrow-stage{top:18px;left:20px}}
 
 /* ---------- SECTIONS ---------- */
 section.dark{background:var(--stage);color:var(--cream)}
@@ -142,7 +157,7 @@ body.film .watch{display:none}
 </style>
 </head>
 <body>
-<a class="watch" id="watch" href="#" aria-label="Watch the 30-second film"><i></i>Watch the film</a>
+<a class="watch" id="watch" href="#" aria-label="Watch the 36-second film"><i></i>Watch the film</a>
 <div class="modal" id="modal" role="dialog" aria-modal="true"><button class="x" id="closeModal">Close</button><video id="film-video" src="film.mp4" controls playsinline preload="metadata"></video></div>
 
 <!-- ================= FILM ================= -->
@@ -152,51 +167,68 @@ body.film .watch{display:none}
       <defs>
         <clipPath id="cpA"><use href="#shapeA"/></clipPath>
       </defs>
-      <g id="gShapes" opacity="0">
-        <ellipse id="shapeA" cx="-400" cy="450" rx="236" ry="228" fill="#BA8A3E"/>
-        <rect id="shapeB" x="1700" y="222" width="470" height="456" rx="190" fill="#332E2A"/>
-        <rect id="shapeB2" x="1700" y="222" width="470" height="456" rx="190" fill="#BA5632" clip-path="url(#cpA)"/>
+      <g id="gShapes">
+        <g id="gClones" opacity="0"><rect class="clone" fill="#332E2A"/><rect class="clone" fill="#332E2A"/><rect class="clone" fill="#332E2A"/><rect class="clone" fill="#332E2A"/><rect class="clone" fill="#332E2A"/><rect class="clone" fill="#332E2A"/><rect class="clone" fill="#332E2A"/><rect class="clone" fill="#332E2A"/></g>
+        <g id="gField" opacity="0"><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/><rect class="fc" fill="#332E2A"/></g>
+        <g id="gSpark" opacity="0" font-family="Manrope, system-ui, sans-serif">
+          <path id="spark" d="M0 0" pathLength="1" stroke="#BA8A3E" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1" stroke-dashoffset="1"/>
+          <line id="goLine" x1="0" y1="0" x2="0" y2="0" stroke="#BA5632" stroke-width="2" stroke-dasharray="6 6"/>
+          <text id="goText" x="0" y="0" font-size="14" font-weight="600" letter-spacing="2" fill="#BA5632">GO-LIVE</text>
+        </g>
+        <ellipse id="shapeA" cx="-400" cy="450" rx="236" ry="228" fill="#BA8A3E" opacity="0"/>
+        <rect id="shapeB" x="1900" y="222" width="470" height="456" rx="190" fill="#332E2A" opacity="0"/>
+        <rect id="shapeB2" x="1900" y="222" width="470" height="456" rx="190" fill="#BA5632" clip-path="url(#cpA)" opacity="0"/>
+        <circle id="ring" cx="0" cy="0" r="14" fill="none" stroke="#BA5632" stroke-width="3" opacity="0"/>
+        <circle id="dot" cx="0" cy="0" r="14" fill="#BA5632" opacity="0"/>
         <g id="labA" font-family="Manrope, system-ui, sans-serif" fill="#F5F1E6" opacity="0">
           <text id="labA1" x="0" y="440" font-size="40" font-weight="800" letter-spacing="-0.5">Human</text>
           <text id="labA2" x="0" y="486" font-size="40" font-weight="400" letter-spacing="-0.5">wisdom</text>
-          <text id="labA3" x="0" y="522" font-size="15" font-weight="600" letter-spacing="2.2" opacity=".8">JUDGMENT · CONTEXT · EXPERIENCE</text>
         </g>
         <g id="labB" font-family="Manrope, system-ui, sans-serif" fill="#F5F1E6" opacity="0">
           <text id="labB1" x="0" y="440" font-size="40" font-weight="800" letter-spacing="-0.5">Machine</text>
           <text id="labB2" x="0" y="486" font-size="40" font-weight="400" letter-spacing="-0.5">intelligence</text>
-          <text id="labB3" x="0" y="522" font-size="15" font-weight="600" letter-spacing="2.2" opacity=".8">SPEED · SCALE · EXECUTION</text>
         </g>
       </g>
     </svg>
+
+    <div class="eyebrow-stage" id="eyeH">The human half</div>
+    <div class="eyebrow-stage ma" id="eyeM">The machine half</div>
 
     <div class="layer">
       <div class="hook" id="hook">
         <div class="l1" id="hookL1">Software can be built in minutes now.</div>
         <div class="slot">
-          <div class="l2" id="hookL2">What's scarce?</div>
+          <div class="l2" id="hookL2">So what's scarce?</div>
           <div class="choice" id="choice">
-            <button class="play" id="choicePlay" type="button"><span class="ic"></span><span><b>Play the film</b><small>30 seconds, sound on</small></span></button>
+            <button class="play" id="choicePlay" type="button"><span class="ic"></span><span><b>Play the film</b><small>36 seconds, sound on</small></span></button>
             <button class="scroll" id="choiceScroll" type="button"><span class="ic"></span><span><b>Scroll to reveal</b><small>Take it at your own pace</small></span></button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="layer"><div class="simp" id="simp">Wisdom is intelligence with purpose.</div></div>
+    <div class="cap" id="cap1"><span class="b cue" data-in="4.5">Judgment.</span><span class="cue" data-in="5.6">Knowing where the value is,</span><span class="cue" data-in="7.3">and which number should move.</span></div>
+    <div class="cap" id="cap2"><span class="cue" data-in="9.3">And the capacity to do the work</span><span class="cue" data-in="11.2">at scale,</span><span class="cue" data-in="12.0">and keep learning after go-live.</span></div>
+    <div class="cap" id="cap3"><span class="cue" data-in="14.5">Every AI company this year sells the machine.</span></div>
+    <div class="cap" id="cap4"><span class="cue" data-in="18.2">We built the opposite.</span></div>
+    <div class="cap" id="cap5"><span class="cue" data-in="20.3">Wisdom is intelligence with purpose.</span></div>
+    <div class="cap" id="cap6"><span class="cue" data-in="23.6">There was never a word for a company built on both.</span></div>
+    <div class="cap" id="cap7"><span class="cue" data-in="26.7">So we made one.</span></div>
+
+    <div class="num n1" id="num1"><div class="lab">Old process to new</div><div class="v" id="num1v">+0%</div></div>
+    <div class="num n2" id="num2"><div class="v" id="num2v">0</div><div class="lab">Agents built in-house</div></div>
 
     <div class="layer">
       <div class="tick" id="tick">
-        <div class="win"><div class="col" id="col">
+        <div class="win"><div class="col" id="tcol">
           <span>like</span><span>other</span><span>clock</span><span>street</span><span>length</span><span>edge</span><span>both</span>
         </div></div><div class="win suf"><span>wise</span></div><div class="win ai" id="ai"><span>.ai</span></div>
       </div>
     </div>
 
-    <div class="layer">
-      <div class="tag" id="tag">
-        <div class="t1" id="tag1">Wisdom meets intelligence.</div>
-        <div class="t2" id="tag2">A TASC Company</div>
-      </div>
+    <div class="tag" id="tag">
+      <div class="t1" id="tag1">Wisdom meets intelligence.</div>
+      <div class="t2" id="tag2">A TASC Company</div>
     </div>
 
     <div class="hint" id="hint">Scroll<i></i></div>
@@ -293,114 +325,168 @@ body.film .watch{display:none}
 <script>
 (function(){
   const $=id=>document.getElementById(id);
+  const DUR=36;                               // seconds; the scroll maps onto the same clock
   const film=$('film'), stage=$('stage'), svg=$('venn');
-  const A=$('shapeA'), B=$('shapeB'), B2=$('shapeB2'), gS=$('gShapes');
+  const A=$('shapeA'), B=$('shapeB'), B2=$('shapeB2'), gS=$('gShapes'), gC=$('gClones'), gF=$('gField'), gSp=$('gSpark');
+  const clones=[...gC.querySelectorAll('.clone')], fcs=[...gF.querySelectorAll('.fc')];
+  const spark=$('spark'), goLine=$('goLine'), goText=$('goText');
+  const dot=$('dot'), ring=$('ring');
   const labA=$('labA'), labB=$('labB');
-  const labAt=['labA1','labA2','labA3'].map($), labBt=['labB1','labB2','labB3'].map($);
+  const labAt=['labA1','labA2'].map($), labBt=['labB1','labB2'].map($);
   const hook=$('hook'), hookL1=$('hookL1'), hookL2=$('hookL2');
   const choice=$('choice'), watch=$('watch');
-  const simp=$('simp'), tick=$('tick'), col=$('col'), ai=$('ai'), tag=$('tag'), tag1=$('tag1'), tag2=$('tag2'), hint=$('hint');
+  const eyeH=$('eyeH'), eyeM=$('eyeM');
+  const caps=[1,2,3,4,5,6,7].map(i=>$('cap'+i));
+  const capWin=[[4.5,8.8],[9.3,13.9],[14.5,18.0],[18.2,20.0],[20.3,23.1],[23.6,26.4],[26.7,28.0]];
+  const cues=[...document.querySelectorAll('.cap .cue')].map(el=>({el,t:+el.dataset.in}));
+  const num1=$('num1'), num1v=$('num1v'), num2=$('num2'), num2v=$('num2v');
+  const tick=$('tick'), tcol=$('tcol'), ai=$('ai'), tag1=$('tag1'), tag2=$('tag2'), hint=$('hint');
   const isFilm=/[?&]film/.test(location.search);
   if(isFilm) document.body.classList.add('film');
 
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  const ease=t=>t<.5?2*t*t:-1+(4-2*t)*t;              // easeInOut quad
-  const seg=(p,a,b)=>ease(clamp((p-a)/(b-a),0,1));
-  const lerp=(a,b,t)=>a+(b-a)*t;
-  const hex=(c1,c2,t)=>{const p=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));const a=p(c1),b=p(c2);return '#'+a.map((v,i)=>Math.round(lerp(v,b[i],t)).toString(16).padStart(2,'0')).join('')};
+  const ease=x=>x<.5?2*x*x:-1+(4-2*x)*x;
+  const easeOut=x=>1-Math.pow(1-x,3);
+  const seg=(t,a,b)=>ease(clamp((t-a)/(b-a),0,1));
+  const win=(t,a,b,f=0.35,o=0.3)=>seg(t,a,a+f)*(1-seg(t,b,b+o));
+  const lerp=(a,b,x)=>a+(b-a)*x;
+  const hex=(c1,c2,x)=>{const p=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));const a=p(c1),b=p(c2);return '#'+a.map((v,i)=>Math.round(lerp(v,b[i],x)).toString(16).padStart(2,'0')).join('')};
+  const fade=(el,v,rise)=>{el.style.opacity=v; if(rise!==undefined) el.style.transform=`translateY(${(1-v)*rise}px)`;};
 
-  // Geometry adapts to viewport aspect (portrait uses a 900x900 box)
-  let W=1600, H=900, K=1, Wv=1600;
+  let W=1600,H=900,K=1,Wv=1600;
   function layout(){
     const ar=stage.clientWidth/stage.clientHeight;
     W = ar>=1 ? 1600 : (ar>=.75 ? 1100 : 900);
     K = Math.max(.7, Math.min(1, W/1600*1.3));
     Wv = W/K;
     svg.setAttribute('viewBox',`0 0 ${W} ${H}`);
-    gS.setAttribute('transform',`translate(${W/2} 450) scale(${K}) translate(${-Wv/2} -450)`);
+    gS.setAttribute('transform',`translate(${W/2} 430) scale(${K}) translate(${-Wv/2} -430)`);
     wordW=words.map(s=>s.getBoundingClientRect().width);
   }
   // Ticker window tracks the current word's width so the wordmark stays centred
-  const words=[...col.children], win0=col.parentNode;
+  const words=[...tcol.children], win0=tcol.parentNode;
   let wordW=[];
-  const R=236;                       // ellipse rx
-  const BW=470;                      // squircle width
+  const R=236, BW=470, BH=456, CY=430;
+  function setRect(el,cx,cy,w,h){el.setAttribute('x',cx-w/2);el.setAttribute('y',cy-h/2);el.setAttribute('width',w);el.setAttribute('height',h);el.setAttribute('rx',190*(w/BW));}
 
-  function render(p){
-    // ---- 1. Hook (0 - .16)
-    const h1=isFilm?seg(p,0,.05):1, h2=isFilm?seg(p,.05,.10):seg(p,.015,.06), hOut=1-seg(p,.13,.17);
-    hook.style.opacity=1; hookL1.style.opacity=h1*hOut; hookL1.style.transform=`translateY(${(1-h1)*14}px)`;
-    hookL2.style.opacity=h2*hOut; hookL2.style.transform=`translateY(${(1-h2)*14}px)`;
-    hint.style.opacity=1-seg(p,0,.05);
-    // entry choice gives way to "What's scarce?"; the corner button takes over
-    const cOut=seg(p,0,.035);
+  function render(t){
+    // ---- Beat 1: hook
+    const h1=isFilm?seg(t,0,.6):1, h2=seg(t,2.6,3.1), hOut=1-seg(t,3.7,4.3);
+    hook.style.opacity=1;
+    fade(hookL1,h1*hOut,14); fade(hookL2,h2*hOut,14);
+    hint.style.opacity=1-seg(t,0,1.5);
+    // entry choice gives way on the first scroll; the corner button takes over
+    const cOut=seg(t,0,1.2);
     choice.style.opacity=1-cOut; choice.style.transform=`translateY(${-cOut*10}px)`;
     choice.style.visibility=cOut>.98?'hidden':'visible';
-    const wIn=seg(p,.03,.07);
+    const wIn=seg(t,1.0,2.4);
     watch.style.opacity=wIn; watch.style.pointerEvents=wIn>.5?'auto':'none';
 
-    // ---- 2. Shapes enter (.16 - .34) apart, then 3. converge (.38 - .52)
-    const enter=seg(p,.16,.34), conv=seg(p,.38,.52);
-    const cx=Wv/2;
-    const apartA=cx-R-60, apartB=cx+R+60;         // nearly touching
-    const meetA=cx-150,  meetB=cx+150;             // overlap
-    const ax=lerp(lerp(-R-80,apartA,enter),meetA,conv);
-    const bx=lerp(lerp(Wv+R+80,apartB,enter),meetB,conv);
-    // 4. recede into background for the word (.56 - .66)
-    const rec=seg(p,.56,.66);
-    const scale=lerp(1,2.4,rec), sOp=(1-rec*0.9)*(1-seg(p,.70,.78));
-    const cy=450;
-    A.setAttribute('cx',ax); A.setAttribute('rx',R*scale); A.setAttribute('ry',(R-8)*scale); A.setAttribute('cy',cy);
-    const bw=BW*scale, bh=456*scale;
-    [B,B2].forEach(el=>{el.setAttribute('x',bx-bw/2);el.setAttribute('y',cy-bh/2);el.setAttribute('width',bw);el.setAttribute('height',bh);el.setAttribute('rx',190*scale);});
-    gS.setAttribute('opacity', Math.min(1,enter*1.4)*sOp);
+    // ---- Eyebrows and captions
+    fade(eyeH,win(t,4.3,8.9)); fade(eyeM,win(t,9.0,13.9));
+    caps.forEach((c,i)=>{const [a,b]=capWin[i]; c.style.opacity=1-seg(t,b,b+0.3);});
+    cues.forEach(c=>fade(c.el,seg(t,c.t,c.t+.35),8));
 
-    // labels sit in the outer part of each shape
-    const lab=seg(p,.30,.36)*(1-seg(p,.55,.60));
-    labA.setAttribute('opacity',lab); labB.setAttribute('opacity',lab);
-    const laX=ax-R+58, lbX=bx-60;
-    labAt.forEach(t=>t.setAttribute('x',laX));
-    labBt.forEach(t=>t.setAttribute('x',lbX));
+    // ---- Beat 2: circle A, the dot, the pulse, the delta counter
+    const xA2=0.31*Wv, dotX=xA2+80;
+    let ax=lerp(-R-80,xA2,seg(t,4.3,5.4));
+    ax=lerp(ax,dotX,seg(t,6.3,7.3));
+    let ar=R, aOp=seg(t,4.3,4.8);
+    const dOp=seg(t,5.8,6.2)*(1-seg(t,8.9,9.5));
+    dot.setAttribute('cx',dotX); dot.setAttribute('cy',CY); dot.setAttribute('opacity',dOp);
+    const pu=clamp((t-7.4)/0.9,0,1);
+    ring.setAttribute('cx',dotX); ring.setAttribute('cy',CY); ring.setAttribute('r',14+136*ease(pu)); ring.setAttribute('opacity',pu>0&&pu<1?(1-pu)*.9:0);
+    const n1=win(t,7.2,8.8,0.3,0.3);
+    fade(num1,n1); num1.style.transform=`translateY(calc(-50% + ${(1-seg(t,7.2,7.5))*10}px))`;
+    const c1=easeOut(clamp((t-7.3)/1.2,0,1));
+    num1v.textContent='+'+Math.round(42*c1)+'%';
 
-    // ---- 3b. Simplification line (.47 - .53 in, .56 - .60 out)
-    const s=seg(p,.47,.53)*(1-seg(p,.56,.60));
-    simp.style.opacity=s; simp.style.transform=`translateY(${(1-seg(p,.47,.53))*12}px)`;
+    // ---- Beat 3: squircle B, grid on "at scale" with the agent counter, sparkline on "keep learning"
+    const xB=0.69*Wv;
+    let bx=lerp(Wv+R+80,xB,seg(t,9.2,10.2)), bw=BW, bh=BH, bOp=seg(t,9.2,9.7);
+    const split=seg(t,11.2,11.9)*(1-seg(t,12.0,12.6));
+    bw=lerp(BW,150,split); bh=lerp(BH,146,split);
+    const br=clamp((t-12.7)/0.9,0,1); const breathe=1+0.06*Math.sin(Math.PI*br);
+    bw*=breathe; bh*=breathe;
+    const n2=win(t,11.1,13.9,0.3,0.3);
+    fade(num2,n2); num2.style.transform=`translate(-50%,-50%) translateY(${(1-seg(t,11.1,11.4))*10}px)`;
+    num2v.textContent=String(Math.round(36*easeOut(clamp((t-11.2)/1.1,0,1))));
+    // sparkline under the squircle: gentle rise, a go-live tick, then a steeper rise
+    const sx0=xB-230, sx1=xB+230, sy=CY+292, gx=xB-40;
+    spark.setAttribute('d',`M${sx0} ${sy} C ${sx0+90} ${sy-6}, ${gx-60} ${sy-22}, ${gx} ${sy-34} C ${gx+70} ${sy-50}, ${sx1-90} ${sy-120}, ${sx1} ${sy-140}`);
+    const sp=seg(t,12.0,13.5);
+    spark.setAttribute('stroke-dashoffset',1-sp);
+    goLine.setAttribute('x1',gx); goLine.setAttribute('x2',gx); goLine.setAttribute('y1',sy+14); goLine.setAttribute('y2',sy-60);
+    goText.setAttribute('x',gx-30); goText.setAttribute('y',sy+32);
+    gSp.setAttribute('opacity',win(t,12.0,13.9,0.3,0.3));
 
-    // ---- 4. Word ticker (.60 - .76)
-    const tIn=seg(p,.60,.64);
-    tick.style.opacity=tIn;
-    const n=6; // index of "both"
-    const tp=clamp((p-.63)/(.76-.63),0,1);
-    // step through words with a small ease per step
+    // ---- Beat 4: the field ("every AI company sells the machine"), Beat 5: back to one, equal, meeting
+    const field=seg(t,14.5,16.6), back=seg(t,18.2,19.6);
+    const fx0=0.30*Wv, fx1=0.94*Wv, cols=6, rows=3, dx=(fx1-fx0)/(cols-1), dy=200;
+    // circle pushed to the edge and shrunk while the field fills the frame
+    ax=lerp(ax,0.11*Wv,field); ar=lerp(ar,120,field);
+    ax=lerp(ax,Wv/2-150,back); ar=lerp(ar,R,back);
+    // the main squircle becomes one cell of the field, then grows back
+    const cellX=fx0+3*dx, cellY=CY;
+    bx=lerp(bx,cellX,field); bw=lerp(bw,150,field); bh=lerp(bh,146,field);
+    bx=lerp(bx,Wv/2+150,back); bw=lerp(bw,BW,back); bh=lerp(bh,BH,back);
+    let fi=0;
+    const fieldOp=field*(1-back);
+    gF.setAttribute('opacity',fieldOp*bOp);
+    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+      if(r===1&&c===3) continue;                       // that cell is the main squircle
+      const el=fcs[fi++]; const tx=fx0+c*dx, ty=CY+(r-1)*dy;
+      const arrive=seg(t,14.5+(r*cols+c)*0.07,15.1+(r*cols+c)*0.07);   // arrive in a wave
+      const gx2=lerp(bx,tx,arrive*(1-back)), gy2=lerp(CY,ty,arrive*(1-back));
+      setRect(el,gx2,gy2,150,146); el.setAttribute('opacity',arrive);
+    }
+    aOp*=1-seg(t,22.9,23.5)*0.0;                        // (kept for the recede below)
+
+    // ---- Beat 6 hold on the overlap, then Beat 7: recede and the word changes in place
+    const rec=seg(t,23.2,24.3);
+    const sc=lerp(1,2.4,rec), fadeOut=(1-rec*0.92)*(1-seg(t,25.6,27.0));
+    ar*=sc; bw*=sc; bh*=sc;
+    A.setAttribute('cx',ax); A.setAttribute('cy',CY); A.setAttribute('rx',ar); A.setAttribute('ry',ar-8*sc); A.setAttribute('opacity',aOp*fadeOut);
+    setRect(B,bx,CY,bw,bh); setRect(B2,bx,CY,bw,bh);
+    B.setAttribute('opacity',bOp*fadeOut); B2.setAttribute('opacity',bOp*fadeOut);
+    gC.setAttribute('opacity',split*bOp);
+    const offs=[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]];
+    clones.forEach((c,i)=>{const [ox,oy]=offs[i]; setRect(c,bx+ox*170*split,CY+oy*165*split,150,146);});
+    // labels: on after each half's beat, off during the field, back for the meeting, gone on recede
+    const labOn=(1-seg(t,14.4,14.9))+seg(t,19.0,19.6);
+    labA.setAttribute('opacity',seg(t,8.4,9.0)*aOp*clamp(labOn,0,1)*(1-seg(t,23.1,23.5)));
+    labAt.forEach(el=>el.setAttribute('x',ax-100)); labAt[0].setAttribute('y',CY-10); labAt[1].setAttribute('y',CY+36);
+    labB.setAttribute('opacity',seg(t,13.0,13.6)*bOp*clamp(labOn,0,1)*(1-seg(t,23.1,23.5)));
+    labBt.forEach(el=>el.setAttribute('x',bx-60)); labBt[0].setAttribute('y',CY-10); labBt[1].setAttribute('y',CY+36);
+
+    // ---- The word, in place
+    tick.style.opacity=seg(t,23.7,24.2);
+    const n=6, tp=clamp((t-23.9)/(25.8-23.9),0,1);
     const raw=tp*n, i=Math.floor(raw), f=raw-i;
-    const idx=Math.min(n, i+ease(clamp(f*1.25,0,1)));
-    col.style.transform=`translateY(${-idx*1.3}em)`;
+    const idx=Math.min(n,i+ease(clamp(f*1.25,0,1)));
+    tcol.style.transform=`translateY(${-idx*1.3}em)`;
     const w0=Math.floor(idx), w1=Math.min(n,w0+1);
     win0.style.width=lerp(wordW[w0],wordW[w1],idx-w0)+'px';
-    ai.style.opacity=seg(p,.77,.81);
+    ai.style.opacity=seg(t,26.7,27.3);
 
-    // ---- 5. Dark stage (.82 - .90) + tagline
-    const d=seg(p,.82,.90);
+    // ---- Beat 9: dark stage, tagline
+    const d=seg(t,28.2,29.2);
     stage.style.background=hex('#F5F1E6','#1B1816',d);
     tick.style.color=hex('#332E2A','#F5F1E6',d);
-    tag1.style.opacity=seg(p,.88,.94); tag1.style.transform=`translateY(${(1-seg(p,.88,.94))*10}px)`;
-    tag2.style.opacity=seg(p,.93,.98);
-    tag.style.opacity=1;
-    // shapes fade fully on dark stage
-    gS.setAttribute('opacity', Math.min(1,enter*1.4)*sOp*(1-d));
+    fade(tag1,seg(t,29.5,30.3),10); fade(tag2,seg(t,31.8,32.6),6);
   }
 
-  let cur=0, target=0, raf=null;
+  let cur=0,target=0,raf=null;
   function fromScroll(){
     const rect=film.getBoundingClientRect();
     const total=film.offsetHeight-window.innerHeight;
-    target=clamp(-rect.top/total,0,1);
+    target=clamp(-rect.top/total,0,1)*DUR;
     if(!raf) raf=requestAnimationFrame(tickFrame);
   }
   function tickFrame(){
     raf=null;
-    cur+= (target-cur)*0.18;               // light smoothing
-    if(Math.abs(target-cur)<0.0005) cur=target;
+    cur+=(target-cur)*0.18;
+    if(Math.abs(target-cur)<0.002) cur=target;
     render(cur);
     if(cur!==target) raf=requestAnimationFrame(tickFrame);
   }
@@ -414,10 +500,10 @@ body.film .watch{display:none}
   const openFilm=e=>{e.preventDefault();modal.classList.add('on');vid.currentTime=0;vid.play().catch(()=>{});};
   watch.addEventListener('click',openFilm);
   $('choicePlay').addEventListener('click',openFilm);
-  // nudge the reader into the story: scroll until "What's scarce?" is fully in
+  // nudge the reader into the story: scroll until "So what's scarce?" is fully in
   $('choiceScroll').addEventListener('click',()=>{
     const total=film.offsetHeight-window.innerHeight;
-    window.scrollTo({top:film.offsetTop+total*.08,behavior:'smooth'});
+    window.scrollTo({top:film.offsetTop+total*3.4/DUR,behavior:'smooth'});
   });
   const closeM=()=>{modal.classList.remove('on');vid.pause();};
   $('closeModal').addEventListener('click',closeM);
@@ -425,7 +511,7 @@ body.film .watch{display:none}
   document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM();});
 
   if(isFilm){
-    window.setProgress=function(p){cur=target=p;render(p);};
+    window.setTime=function(t){cur=target=t;render(t);};
     render(0);
   } else {
     fromScroll(); render(0);
