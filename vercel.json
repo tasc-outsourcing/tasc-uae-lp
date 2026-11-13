@@ -25,6 +25,16 @@
       "source": "/brandreveal",
       "destination": "/brandreveal/",
       "permanent": false
+    },
+    {
+      "source": "/en/thank-you-request-for-proposal",
+      "destination": "/en/thank-you-request-for-proposal/",
+      "permanent": false
+    },
+    {
+      "source": "/ar/thank-you-request-for-proposal",
+      "destination": "/ar/thank-you-request-for-proposal/",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -59,6 +69,14 @@
     {
       "source": "/grc-recruitment/:path*",
       "destination": "/grc-recruitment/:path*"
+    },
+    {
+      "source": "/en/thank-you-request-for-proposal/",
+      "destination": "/en/thank-you-request-for-proposal/index.html"
+    },
+    {
+      "source": "/ar/thank-you-request-for-proposal/",
+      "destination": "/ar/thank-you-request-for-proposal/index.html"
     }
   ],
   "headers": [
