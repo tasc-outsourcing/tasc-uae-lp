@@ -71,7 +71,7 @@ export function TechContactSection() {
 
             <HubSpotForm
               portalId="20309062"
-              formId="052af855-0fe5-4a73-89a4-279a76f97319"
+              formId="be26fb8b-58f4-493e-bf02-5e25291ccd6d"
               region="na1"
               className="tasc-hubspot-form"
             />
