@@ -35,6 +35,11 @@
       "source": "/ar/thank-you-request-for-proposal",
       "destination": "/ar/thank-you-request-for-proposal/",
       "permanent": false
+    },
+    {
+      "source": "/emiratisation-recruitment",
+      "destination": "/emiratisation-recruitment/",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -77,6 +82,10 @@
     {
       "source": "/ar/thank-you-request-for-proposal/",
       "destination": "/ar/thank-you-request-for-proposal/index.html"
+    },
+    {
+      "source": "/emiratisation-recruitment/",
+      "destination": "/emiratisation-recruitment/index.html"
     }
   ],
   "headers": [
