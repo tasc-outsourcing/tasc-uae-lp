@@ -40,6 +40,11 @@
       "source": "/emiratisation-recruitment",
       "destination": "/emiratisation-recruitment/",
       "permanent": false
+    },
+    {
+      "source": "/recruitment-agency",
+      "destination": "/recruitment-agency/",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -86,6 +91,10 @@
     {
       "source": "/emiratisation-recruitment/",
       "destination": "/emiratisation-recruitment/index.html"
+    },
+    {
+      "source": "/recruitment-agency/",
+      "destination": "/recruitment-agency/index.html"
     }
   ],
   "headers": [
