@@ -45,11 +45,6 @@
       "source": "/recruitment-agency",
       "destination": "/recruitment-agency/",
       "permanent": false
-    },
-    {
-      "source": "/recruitment-process-outsourcing",
-      "destination": "/recruitment-process-outsourcing/",
-      "permanent": false
     }
   ],
   "rewrites": [
@@ -100,10 +95,6 @@
     {
       "source": "/recruitment-agency/",
       "destination": "/recruitment-agency/index.html"
-    },
-    {
-      "source": "/recruitment-process-outsourcing/",
-      "destination": "/recruitment-process-outsourcing/index.html"
     }
   ],
   "headers": [
