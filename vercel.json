@@ -45,6 +45,11 @@
       "source": "/recruitment-agency",
       "destination": "/recruitment-agency/",
       "permanent": false
+    },
+    {
+      "source": "/thank-you-candidate",
+      "destination": "/thank-you-candidate/",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -95,6 +100,10 @@
     {
       "source": "/recruitment-agency/",
       "destination": "/recruitment-agency/index.html"
+    },
+    {
+      "source": "/thank-you-candidate/",
+      "destination": "/thank-you-candidate/index.html"
     }
   ],
   "headers": [
