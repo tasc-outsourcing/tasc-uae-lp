@@ -50,6 +50,11 @@
       "source": "/thank-you-candidate",
       "destination": "/thank-you-candidate/",
       "permanent": false
+    },
+    {
+      "source": "/uae-recruitment-agency",
+      "destination": "/uae-recruitment-agency/",
+      "permanent": false
     }
   ],
   "rewrites": [
@@ -104,6 +109,10 @@
     {
       "source": "/thank-you-candidate/",
       "destination": "/thank-you-candidate/index.html"
+    },
+    {
+      "source": "/uae-recruitment-agency/",
+      "destination": "/uae-recruitment-agency/index.html"
     }
   ],
   "headers": [
