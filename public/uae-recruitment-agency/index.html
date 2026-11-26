@@ -94,9 +94,26 @@ header .logo img{width:120px}
 .choice:hover,.choice:focus-visible{border-color:var(--blue);background:#fff;outline:none}
 .seeker{margin-top:14px;font-size:13px;color:var(--muted)}
 .seeker a{color:var(--blue);font-weight:700}
-.step2{display:none}
-.form-card.go .step1{display:none}
-.form-card.go .step2{display:block}
+.step-count{font-size:12px;font-weight:700;color:var(--muted);margin:-8px 0 14px;letter-spacing:.04em;text-transform:uppercase}
+.fstep[hidden]{display:none}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fld{display:block;margin-bottom:12px}
+.fld span{display:block;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.fld input,.fld textarea{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:12px 14px;outline:none;transition:border-color .15s}
+.fld textarea{resize:vertical;min-height:120px}
+.fld input:focus,.fld textarea:focus{border-color:var(--blue);background:#fff}
+.fld input.bad,.fld textarea.bad{border-color:#c0392b}
+.ferr{min-height:18px;margin:0 0 6px;font-size:13px;color:#c0392b;font-weight:600}
+.factions{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.factions .btn{min-height:48px}
+.link-btn{background:none;border:0;padding:6px 0;color:var(--blue);font:inherit;font-weight:700;font-size:14px;cursor:pointer}
+.link-btn:hover{text-decoration:underline}
+.fdone{text-align:center;padding:12px 0 8px}
+.fdone .done-ic{width:52px;height:52px;color:var(--green);margin:0 auto 12px}
+.fdone h3{font-size:20px;color:var(--navy);margin-bottom:8px}
+.fdone p{color:var(--text);margin:0}
+.fdone a{color:var(--blue);font-weight:700}
+@media (max-width:400px){.frow{grid-template-columns:1fr}}
 .chosen{display:flex;justify-content:space-between;align-items:center;background:var(--bg);border-radius:8px;padding:10px 12px;font-size:14px;margin-bottom:12px}
 .chosen button{background:none;border:0;color:var(--blue);font-weight:700;cursor:pointer;font:inherit;font-size:13px}
 .assure{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;margin-top:6px}
@@ -261,7 +278,6 @@ footer p{margin:0 0 6px}
       <a class="hdr-link hdr-mail" href="mailto:info@tascoutsourcing.com" data-track="email_click"><svg class="i"><use href="#mail"/></svg><span>info@tascoutsourcing.com</span></a>
       <a class="hdr-link" href="tel:+971501215241" data-track="phone_click"><svg class="i"><use href="#phone"/></svg><span>+971 50 121 5241</span></a>
       <a class="hdr-link" href="https://wa.me/971501215241?text=Hi%20TASC%2C%20I%27d%20like%20to%20discuss%20hiring%20for%20my%20company." target="_blank" rel="noopener" data-track="whatsapp_click"><svg class="i" style="color:#25D366"><use href="#wa"/></svg><span>WhatsApp</span></a>
-      <a class="btn btn-primary" href="#get-shortlist" data-track="cta_header">Get in touch</a>
     </div>
   </div>
 </header>
@@ -297,9 +313,10 @@ footer p{margin:0 0 6px}
       <div class="inner">
         <h2>Get in touch</h2>
         <p class="note">A recruitment consultant calls you within 1 working day.</p>
-        <div class="steps-ind" aria-hidden="true"><i class="on"></i><i class="s2"></i></div>
+        <div class="steps-ind" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+        <p class="step-count" id="step-count">Step 1 of 3</p>
 
-        <div class="step1">
+        <div class="fstep" data-step="1">
           <p class="q">What do you need help with?</p>
           <div class="choices" role="group" aria-label="Service needed">
             <button class="choice" type="button" data-need="Contract staffing"><span>Contract staffing <small>Staff on TASC's visa and payroll</small></span><svg class="i"><use href="#arrow"/></svg></button>
@@ -309,12 +326,40 @@ footer p{margin:0 0 6px}
             <button class="choice" type="button" data-need="Emiratisation hiring"><span>Emiratisation hiring <small>UAE nationals for your quota</small></span><svg class="i"><use href="#arrow"/></svg></button>
             <button class="choice" type="button" data-need="Not sure yet"><span>Not sure yet <small>Talk it through with a consultant</small></span><svg class="i"><use href="#arrow"/></svg></button>
           </div>
-          <p class="seeker">Looking for a job? <a href="https://www.tascoutsourcing.com/en-ae/register-cv" data-track="register_cv_click">Register your CV here</a>. This form is for employers.</p>
         </div>
 
-        <div class="step2">
-          <div class="chosen"><span>Need: <strong id="need-label"></strong></span><button type="button" id="change-need">Change</button></div>
-          <div class="hs-form-frame" data-region="na1" data-form-id="e753a9b8-9622-4c08-b2d9-864b586d4811" data-portal-id="20309062"></div>
+        <form id="lp-form" novalidate>
+          <div class="fstep" data-step="2" hidden>
+            <div class="chosen"><span>Service: <strong id="need-label"></strong></span><button type="button" class="link-btn" data-goto="1">Change</button></div>
+            <p class="q">Your contact details</p>
+            <div class="frow">
+              <label class="fld"><span>First name*</span><input name="firstname" type="text" autocomplete="given-name" required></label>
+              <label class="fld"><span>Last name*</span><input name="lastname" type="text" autocomplete="family-name" required></label>
+            </div>
+            <label class="fld"><span>Work email*</span><input name="email" type="email" autocomplete="email" required></label>
+            <label class="fld"><span>Phone number*</span><input name="phone" type="tel" autocomplete="tel" placeholder="+971 50 000 0000" required></label>
+            <p class="ferr" id="err-2" role="alert"></p>
+            <div class="factions">
+              <button type="button" class="link-btn" data-goto="1">Back</button>
+              <button type="button" class="btn btn-primary" id="to-3">Next <svg class="i"><use href="#arrow"/></svg></button>
+            </div>
+          </div>
+
+          <div class="fstep" data-step="3" hidden>
+            <p class="q">Tell us about your hiring needs</p>
+            <label class="fld"><span>Message*</span><textarea name="hiring_requirement_brief" rows="5" placeholder="Roles, number of hires, location and when you need them to start" required></textarea></label>
+            <p class="ferr" id="err-3" role="alert"></p>
+            <div class="factions">
+              <button type="button" class="link-btn" data-goto="2">Back</button>
+              <button type="submit" class="btn btn-primary" id="submit-btn">Get in touch</button>
+            </div>
+          </div>
+        </form>
+
+        <div class="fstep fdone" data-step="4" hidden>
+          <svg class="i done-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <h3>Thank you, we have your enquiry</h3>
+          <p>A recruitment consultant will call you within 1 working day. Need us sooner? Call or WhatsApp <a href="tel:+971501215241">+971 50 121 5241</a>.</p>
         </div>
 
         <div class="assure"><svg class="i"><use href="#clock"/></svg>Employer enquiries only. Your details are never shared.</div>
@@ -495,22 +540,83 @@ footer p{margin:0 0 6px}
   <a class="go" href="#get-shortlist" data-track="cta_sticky">Get in touch</a>
 </nav>
 
-<script src="https://js.hsforms.net/forms/embed/20309062.js" defer></script>
 <script>
 (function(){
-  var card=document.getElementById('get-shortlist');
-  var label=document.getElementById('need-label');
-  var dots=card.querySelectorAll('.steps-ind i');
+  var PORTAL='20309062', FORM='689a876f-e545-4324-a831-2fd4bb4a4f03';
+  var SERVICE={'Contract staffing':'Contract staffing','Temporary staffing':'Temp Staffing','Permanent recruitment':'Permanent hire','Recruitment process outsourcing':'Recruitment Process Outsourcing','Emiratisation hiring':'Emiratisation','Not sure yet':'Others'};
+  var card=document.getElementById('get-shortlist'), form=document.getElementById('lp-form');
+  var steps=card.querySelectorAll('.fstep'), dots=card.querySelectorAll('.steps-ind i'), count=document.getElementById('step-count');
+  var need='';
   window.dataLayer=window.dataLayer||[];
-  function choose(need){
-    label.textContent=need;
-    card.classList.add('go');
-    dots[1].classList.add('on');
-    window.dataLayer.push({event:'lp_service_selected',service_need:need});
+
+  // keep UTM and gclid from the landing URL for this visit
+  var TRACK=['utm_campaign','utm_source','utm_medium','gclid'], qs=new URLSearchParams(location.search), track={};
+  TRACK.forEach(function(k){
+    var v=qs.get(k);
+    try{ if(v){sessionStorage.setItem('lp_'+k,v)} else {v=sessionStorage.getItem('lp_'+k)} }catch(e){}
+    if(v) track[k]=v;
+  });
+
+  function show(n){
+    steps.forEach(function(el){el.hidden=(+el.dataset.step!==n)});
+    dots.forEach(function(d,i){d.classList.toggle('on',i<Math.min(n,3))});
+    count.textContent=n<4?('Step '+n+' of 3'):'Done';
+    count.hidden=dots[0].parentNode.hidden=(n===4);
+    var f=card.querySelector('.fstep[data-step="'+n+'"] input, .fstep[data-step="'+n+'"] textarea');
+    if(f && n>1) setTimeout(function(){f.focus({preventScroll:true})},50);
+  }
+  function choose(n){
+    need=n; document.getElementById('need-label').textContent=n;
+    window.dataLayer.push({event:'lp_service_selected',service_need:n});
+    show(2);
   }
   card.querySelectorAll('.choice').forEach(function(b){b.addEventListener('click',function(){choose(b.dataset.need)})});
-  document.getElementById('change-need').addEventListener('click',function(){card.classList.remove('go');dots[1].classList.remove('on')});
   document.querySelectorAll('[data-need-link]').forEach(function(a){a.addEventListener('click',function(){choose(a.dataset.needLink)})});
+  card.querySelectorAll('[data-goto]').forEach(function(b){b.addEventListener('click',function(){show(+b.dataset.goto)})});
+
+  function check(stepEl,errEl){
+    var ok=true, first=null;
+    stepEl.querySelectorAll('input,textarea').forEach(function(i){
+      var v=i.value.trim(), bad=!v;
+      if(!bad && i.type==='email') bad=!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+      if(!bad && i.type==='tel') bad=v.replace(/\D/g,'').length<7;
+      i.classList.toggle('bad',bad);
+      if(bad){ok=false; first=first||i}
+    });
+    errEl.textContent=ok?'':'Please complete the highlighted fields.';
+    if(first) first.focus();
+    return ok;
+  }
+  document.getElementById('to-3').addEventListener('click',function(){
+    if(check(card.querySelector('.fstep[data-step="2"]'),document.getElementById('err-2'))) show(3);
+  });
+
+  function cookie(n){var m=document.cookie.match('(?:^|; )'+n+'=([^;]*)');return m?decodeURIComponent(m[1]):''}
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var err=document.getElementById('err-3');
+    if(!check(card.querySelector('.fstep[data-step="3"]'),err)) return;
+    var btn=document.getElementById('submit-btn'); btn.disabled=true; btn.textContent='Sending...';
+    var fd=new FormData(form), fields=[];
+    ['firstname','lastname','email','phone','hiring_requirement_brief'].forEach(function(k){fields.push({objectTypeId:'0-1',name:k,value:String(fd.get(k)||'').trim()})});
+    fields.push({objectTypeId:'0-1',name:'how_can_we_help_',value:SERVICE[need]||'Others'});
+    Object.keys(track).forEach(function(k){fields.push({objectTypeId:'0-1',name:k,value:track[k]})});
+    var ctx={pageUri:location.href,pageName:document.title}, hutk=cookie('hubspotutk'); if(hutk) ctx.hutk=hutk;
+    fetch('https://api.hsforms.com/submissions/v3/integration/submit/'+PORTAL+'/'+FORM,{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:fields,context:ctx})
+    }).then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j}})}).then(function(res){
+      if(!res.ok) throw res.j;
+      window.dataLayer.push({event:'lp_form_submit',service_need:need,form_id:FORM});
+      if(res.j && res.j.redirectUri){ setTimeout(function(){location.href=res.j.redirectUri},300); }
+      else show(4);
+    }).catch(function(x){
+      var msg='Something went wrong. Please try again, or call us on +971 50 121 5241.';
+      if(x && x.errors && x.errors.some(function(e){return /email/i.test(e.message||'')})) msg='Please check your email address and try again.';
+      err.textContent=msg; btn.disabled=false; btn.textContent='Get in touch';
+    });
+  });
+
   document.querySelectorAll('[data-track]').forEach(function(a){a.addEventListener('click',function(){window.dataLayer.push({event:a.dataset.track})})});
 })();
 </script>
